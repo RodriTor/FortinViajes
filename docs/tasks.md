@@ -12,7 +12,7 @@ Formato: `ID — Descripción — Agente — RN — HU — Dependencias — Crit
 - [x] T08 — Resumen, búsqueda y "Mis lugares" — Agente: Backend — RN: 12, 13, 15 — HU: 4, 6 — Dep: T07 — Terminado: endpoints de resumen, lista con búsqueda y mis lugares.
 - [x] T09 — Tests de integración y concurrencia contra PostgreSQL — Agente: Tester — RN: todas — HU: todas — Dep: T05–T08 — Terminado: suite de API y prueba de carrera de cupo en verde.
 - [x] T10 — Frontend base: router, cliente de API y autenticación — Agente: Frontend — RN: 12 — HU: 2 — Dep: T05 — Terminado: layout, ingreso/registro, sesión persistente.
-- [ ] T11 — Frontend del hincha: viajes, anotarse y mis viajes — Agente: Frontend — RN: 1–3, 8–11 — HU: 1, 3, 4 — Dep: T06–T08, T10 — Terminado: catálogo, detalle con formulario, mis lugares y cancelación con advertencia de reintegro.
+- [x] T11 — Frontend del hincha: viajes, anotarse y mis viajes — Agente: Frontend — RN: 1–3, 8–11 — HU: 1, 3, 4 — Dep: T06–T08, T10 — Terminado: catálogo, detalle con formulario, mis lugares y cancelación con advertencia de reintegro.
 - [ ] T12 — Frontend del organizador: panel — Agente: Frontend — RN: 4–7, 13, 15 — HU: 5, 6 — Dep: T11 — Terminado: crear viaje, estados, resumen, pasajeros, búsqueda y pagos.
 - [ ] T13 — Configuración de despliegue, CI y scripts de administración — Agente: Arquitecto — RN: 12 — HU: todas — Dep: T09, T12 — Terminado: `render.yaml`, `netlify.toml`, GitHub Actions, `create-admin`, seed de ejemplo y guía de despliegue.
 - [ ] T14 — Informe de pruebas con ejecución real — Agente: Tester — RN: todas — HU: todas — Dep: T09, T12 — Terminado: resultados reales de tests, typecheck, build y matriz de API.
