@@ -4,7 +4,7 @@ Formato: `ID — Descripción — Agente — RN — HU — Dependencias — Crit
 
 - [x] T01 — Estructura monorepo, AGENTS.md y documentación base — Agente: Arquitecto — RN: todas — HU: todas — Dep: ninguna — Terminado: workspaces, `AGENTS.md`, idea, decisiones, glosario y agentes creados.
 - [x] T02 — Especificación con reglas numeradas y plan técnico — Agente: Analista — RN: RN1–RN16 — HU: HU1–HU6 — Dep: T01 — Terminado: `spec.md`, `plan.md` y `tasks.md` consistentes.
-- [ ] T03 — Esquema PostgreSQL — Agente: Backend — RN: 1, 3, 4, 6, 16 — HU: 3, 4, 5, 6 — Dep: T02 — Terminado: tablas, índice único parcial y trigger de capacidad aplican sobre una base real.
+- [x] T03 — Esquema PostgreSQL — Agente: Backend — RN: 1, 3, 4, 6, 16 — HU: 3, 4, 5, 6 — Dep: T02 — Terminado: tablas, índice único parcial y trigger de capacidad aplican sobre una base real.
 - [ ] T04 — Reglas de negocio puras con tests unitarios — Agente: Backend/Tester — RN: 2, 4, 6, 7, 8, 9, 11, 14, 15 — HU: 3, 4, 5, 6 — Dep: T02 — Terminado: funciones puras y tests unitarios en verde.
 - [ ] T05 — Infraestructura del backend y autenticación — Agente: Backend — RN: 12, 16 — HU: 2 — Dep: T03 — Terminado: config, pool, errores, app Express, registro, login, JWT, roles.
 - [ ] T06 — API de viajes — Agente: Backend — RN: 6, 7, 12 — HU: 1, 5 — Dep: T04, T05 — Terminado: listar, detalle, crear, cambiar estado (con cascada de cancelación).
