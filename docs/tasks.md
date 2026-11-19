@@ -15,7 +15,7 @@ Formato: `ID — Descripción — Agente — RN — HU — Dependencias — Crit
 - [x] T11 — Frontend del hincha: viajes, anotarse y mis viajes — Agente: Frontend — RN: 1–3, 8–11 — HU: 1, 3, 4 — Dep: T06–T08, T10 — Terminado: catálogo, detalle con formulario, mis lugares y cancelación con advertencia de reintegro.
 - [x] T12 — Frontend del organizador: panel — Agente: Frontend — RN: 4–7, 13, 15 — HU: 5, 6 — Dep: T11 — Terminado: crear viaje, estados, resumen, pasajeros, búsqueda y pagos.
 - [x] T13 — Configuración de despliegue, CI y scripts de administración — Agente: Arquitecto — RN: 12 — HU: todas — Dep: T09, T12 — Terminado: `render.yaml`, `netlify.toml`, GitHub Actions, `create-admin`, seed de ejemplo y guía de despliegue.
-- [ ] T14 — Informe de pruebas con ejecución real — Agente: Tester — RN: todas — HU: todas — Dep: T09, T12 — Terminado: resultados reales de tests, typecheck, build y matriz de API.
+- [x] T14 — Informe de pruebas con ejecución real — Agente: Tester — RN: todas — HU: todas — Dep: T09, T12 — Terminado: resultados reales de tests, typecheck, build y matriz de API.
 - [ ] T15 — Crear base en Neon y desplegar la API en Render — Agente: DevOps (persona) — RN: todas — HU: todas — Dep: T13 — Terminado: `/api/health` público responde `ok`.
 - [ ] T16 — Desplegar el frontend en Netlify y validar el flujo real — Agente: Revisor (persona) — RN: todas — HU: todas — Dep: T15 — Terminado: URL pública probada de punta a punta.
 - [ ] T17 — Registrar URLs y capturas reales en el informe — Agente: Revisor (persona) — RN: todas — HU: todas — Dep: T14–T16 — Terminado: enlaces y evidencia reales en README e informe.
