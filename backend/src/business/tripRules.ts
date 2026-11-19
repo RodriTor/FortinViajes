@@ -47,10 +47,12 @@ export function isEditableStatus(status: TripStatus): boolean {
   return status === "Abierto" || status === "Completo";
 }
 
-/** RN6: mensaje claro de por qué un viaje no admite cambios de pasajeros. */
-export function assertEditableForPassengers(status: TripStatus): void {
+/** RN6: mensaje claro de por qué un viaje no admite altas ni bajas de pasajeros. */
+export function assertEditableForPassengers(status: TripStatus, action: "add" | "cancel" = "add"): void {
   if (!isEditableStatus(status)) {
-    throw new AppError(409, `No se pueden modificar pasajeros de un viaje ${status}`);
+    throw new AppError(409, action === "add"
+      ? `No se pueden agregar pasajeros a un viaje ${status}`
+      : `No se pueden cancelar lugares de un viaje ${status}`);
   }
 }
 

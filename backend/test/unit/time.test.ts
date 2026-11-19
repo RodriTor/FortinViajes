@@ -26,3 +26,12 @@ describe("RN14 — zona horaria argentina", () => {
     assert.equal(hoursUntil(new Date("2026-12-01T11:00:00Z"), now), -1);
   });
 });
+
+describe("RN11 — rango del día argentino", () => {
+  test("cubre de 00:00 a 24:00 en UTC-3", async () => {
+    const { argentinaDayRange } = await import("../../src/business/time.js");
+    const r = argentinaDayRange(new Date("2026-12-01T21:00:00Z"));
+    assert.equal(r.from.toISOString(), "2026-12-01T03:00:00.000Z");
+    assert.equal(r.to.toISOString(), "2026-12-02T03:00:00.000Z");
+  });
+});

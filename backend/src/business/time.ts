@@ -35,3 +35,9 @@ export function argentinaDayKey(date: Date): string {
 export function hoursUntil(target: Date, now: Date): number {
   return (target.getTime() - now.getTime()) / HOUR_MS;
 }
+
+/** Rango UTC [from, to) que cubre el día calendario argentino del instante dado (RN11). */
+export function argentinaDayRange(date: Date): { from: Date; to: Date } {
+  const from = new Date(`${argentinaDayKey(date)}T00:00:00-03:00`);
+  return { from, to: new Date(from.getTime() + 24 * HOUR_MS) };
+}

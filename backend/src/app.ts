@@ -15,6 +15,9 @@ import { TripRepository } from "./repositories/tripRepository.js";
 import { TripService } from "./services/tripService.js";
 import { TripController } from "./controllers/tripController.js";
 import { createTripRoutes } from "./routes/tripRoutes.js";
+import { PassengerService } from "./services/passengerService.js";
+import { PassengerController } from "./controllers/passengerController.js";
+import { createPassengerRoutes } from "./routes/passengerRoutes.js";
 import { createAuthRoutes } from "./routes/authRoutes.js";
 
 export function createApp(db: Database, config: Config, clock: () => Date = () => new Date()) {
@@ -35,6 +38,7 @@ export function createApp(db: Database, config: Config, clock: () => Date = () =
   const tripRepo = new TripRepository();
   const passengerRepo = new PassengerRepository();
   const tripService = new TripService(db, tripRepo, passengerRepo, clock);
+  const passengerService = new PassengerService(db, tripRepo, passengerRepo, clock);
 
   const api = express.Router();
   api.get("/health", async (_req, res) => {
@@ -48,6 +52,7 @@ export function createApp(db: Database, config: Config, clock: () => Date = () =
   api.use("/auth", rateLimit({ windowMs: 15 * 60 * 1000, limit: config.authRateLimit, standardHeaders: true, legacyHeaders: false, message: { error: "Demasiados intentos. Probá de nuevo en unos minutos." } }));
   api.use("/auth", createAuthRoutes(new AuthController(authService), requireAuth));
   api.use("/trips", createTripRoutes(new TripController(tripService), requireAuth, requireAdmin));
+  api.use("/", createPassengerRoutes(new PassengerController(passengerService), requireAuth, requireAdmin));
   app.use("/api", api);
 
   app.use("/api", (_req, _res, next) => next(new AppError(404, "Ruta no encontrada")));

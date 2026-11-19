@@ -50,6 +50,11 @@ function map(row: any): PassengerRecord {
 const escapeLike = (s: string) => s.replace(/[\\%_]/g, "\\$&");
 
 export class PassengerRepository {
+  /** Bloqueo asesor por clave de texto, liberado al terminar la transacción. Serializa operaciones del mismo usuario o DNI (RN10, RN11). */
+  async lock(db: Queryable, key: string): Promise<void> {
+    await db.query("SELECT pg_advisory_xact_lock(hashtextextended($1, 0))", [key]);
+  }
+
   async findById(db: Queryable, id: string): Promise<PassengerRecord | null> {
     const r = await db.query(`SELECT ${COLUMNS} FROM passengers p WHERE p.id = $1`, [id]);
     return r.rows[0] ? map(r.rows[0]) : null;
