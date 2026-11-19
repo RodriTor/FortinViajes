@@ -1,0 +1,21 @@
+# Blueprint de Render para el backend. Los secretos se cargan en el panel de Render (sync: false), nunca acá.
+services:
+  - type: web
+    name: fortinviajes-api
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: npm ci --include=dev && npm run build -w backend
+    startCommand: npm run start -w backend
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 22
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
