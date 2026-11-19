@@ -162,4 +162,43 @@ export class PassengerService {
       return { passenger: toPassengerDto(updated, trip.ticketPrice) };
     });
   }
+
+  /** RN13: lista (y búsqueda) de pasajeros de un viaje. Solo el organizador (lo exige la ruta). */
+  async listPassengers(tripId: string, q?: unknown) {
+    if (!isUuid(tripId)) throw new AppError(404, NOT_FOUND_TRIP);
+    const trip = await this.trips.findById(this.db, tripId);
+    if (!trip) throw new AppError(404, NOT_FOUND_TRIP);
+    const query = typeof q === "string" ? q.trim().slice(0, 100) : "";
+    const list = await this.passengers.findByTrip(this.db, tripId, query || undefined);
+    return { passengers: list.map((p) => toPassengerDto(p, trip.ticketPrice)) };
+  }
+
+  /** HU4/RN12: "Mis lugares". Incluye una vista previa de la política de cancelación calculada por el servidor. */
+  async myPassengers(actor: PublicUser) {
+    const now = this.clock();
+    const list = await this.passengers.findByUser(this.db, actor.id);
+    return {
+      passengers: list.map((p) => {
+        const dto = toPassengerDto(p, p.trip.ticketPrice);
+        const editable = p.trip.status === "Abierto" || p.trip.status === "Completo";
+        const cancellation =
+          p.status === "ACTIVO" && editable
+            ? cancellationPolicy({ departureAt: p.trip.departureAt, now, isAdmin: false, amountPaid: dto.amountPaid })
+            : null;
+        return {
+          ...dto,
+          trip: {
+            id: p.tripId,
+            rival: p.trip.rival,
+            stadium: p.trip.stadium,
+            departureDateTime: p.trip.departureAt.toISOString(),
+            meetingPoint: p.trip.meetingPoint,
+            ticketPrice: p.trip.ticketPrice,
+            status: p.trip.status
+          },
+          cancellation
+        };
+      })
+    };
+  }
 }

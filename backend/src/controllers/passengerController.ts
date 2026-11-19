@@ -16,4 +16,12 @@ export class PassengerController {
   updatePayment = async (req: Request, res: Response) => {
     res.json(await this.service.updatePayment(req.params.tripId, req.params.passengerId, req.body));
   };
+
+  list = async (req: Request, res: Response) => {
+    res.json(await this.service.listPassengers(req.params.tripId, req.query.q));
+  };
+
+  mine = async (req: Request, res: Response) => {
+    res.json(await this.service.myPassengers(req.user!));
+  };
 }

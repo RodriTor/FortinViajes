@@ -8,5 +8,6 @@ export function createTripRoutes(controller: TripController, requireAuth: Reques
   router.post("/", requireAuth, requireAdmin, asyncHandler(controller.create));
   router.get("/:id", asyncHandler(controller.get));
   router.patch("/:id/status", requireAuth, requireAdmin, asyncHandler(controller.changeStatus));
+  router.get("/:id/summary", requireAuth, requireAdmin, asyncHandler(controller.summary));
   return router;
 }

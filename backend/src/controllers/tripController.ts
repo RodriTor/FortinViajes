@@ -20,4 +20,8 @@ export class TripController {
   changeStatus = async (req: Request, res: Response) => {
     res.json({ trip: await this.service.changeStatus(req.params.id, req.body?.status) });
   };
+
+  summary = async (req: Request, res: Response) => {
+    res.json(await this.service.getSummary(req.params.id));
+  };
 }
