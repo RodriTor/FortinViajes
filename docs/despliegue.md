@@ -12,7 +12,8 @@ Pila recomendada por la cátedra: **Neon** (PostgreSQL) → **Render** (API) →
    DATABASE_URL="<cadena de Neon>" npm run db:schema      # crea tablas, índices y trigger
    DATABASE_URL="<cadena de Neon>" npm run create-admin -- tu@email.com "UnaClaveLarga123" "Tu Nombre"
    ```
-3. (Opcional) Cargá viajes de ejemplo: `psql "<cadena de Neon>" -f sql/seed.example.sql`.
+3. Cargá el próximo partido real: pegá `backend/sql/seed.sql` en el SQL Editor de Neon (o `psql "<cadena de Neon>" -f sql/seed.sql`). Es seguro correrlo más de una vez.
+4. Si ya tenías la base creada con una versión anterior, volvé a correr `npm run db:schema` para agregar las columnas nuevas (competición y horario del partido).
 
 ## 2. API en Render (T15)
 1. Subí el repositorio a GitHub (público) y en Render elegí **New → Blueprint** (usa `render.yaml`) o **New → Web Service** con:

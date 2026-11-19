@@ -36,7 +36,7 @@ cp .env.example backend/.env           # editá DATABASE_URL, JWT_SECRET y TEST_
 cp frontend/.env.example frontend/.env
 npm run db:schema -w backend           # crea tablas, índices y trigger
 npm run create-admin -w backend -- organizador@mail.com "ClaveSegura123" "Tu Nombre"
-psql "$DATABASE_URL" -f backend/sql/seed.example.sql   # opcional: viajes de ejemplo
+psql "$DATABASE_URL" -f backend/sql/seed.sql   # carga el próximo partido real (Vélez vs Belgrano, 20/11)
 npm run dev                            # API en :3000 y web en http://localhost:5173
 ```
 

@@ -16,6 +16,8 @@ Formato: `ID — Descripción — Agente — RN — HU — Dependencias — Crit
 - [x] T12 — Frontend del organizador: panel — Agente: Frontend — RN: 4–7, 13, 15 — HU: 5, 6 — Dep: T11 — Terminado: crear viaje, estados, resumen, pasajeros, búsqueda y pagos.
 - [x] T13 — Configuración de despliegue, CI y scripts de administración — Agente: Arquitecto — RN: 12 — HU: todas — Dep: T09, T12 — Terminado: `render.yaml`, `netlify.toml`, GitHub Actions, `create-admin`, seed de ejemplo y guía de despliegue.
 - [x] T14 — Informe de pruebas con ejecución real — Agente: Tester — RN: todas — HU: todas — Dep: T09, T12 — Terminado: resultados reales de tests, typecheck, build y matriz de API.
+- [x] T18 — Datos reales (Vélez vs Belgrano 20/11), competición y horario del partido — Agente: Backend — RN: 7 — HU: 1, 5 — Dep: T09 — Terminado: columnas nuevas, `seed.sql` idempotente y tests en verde.
+- [x] T19 — Rediseño de la portada: hero, próximo partido, cómo funciona e historia — Agente: Frontend — RN: — HU: 1 — Dep: T11 — Terminado: portada nueva responsive.
 - [ ] T15 — Crear base en Neon y desplegar la API en Render — Agente: DevOps (persona) — RN: todas — HU: todas — Dep: T13 — Terminado: `/api/health` público responde `ok`.
 - [ ] T16 — Desplegar el frontend en Netlify y validar el flujo real — Agente: Revisor (persona) — RN: todas — HU: todas — Dep: T15 — Terminado: URL pública probada de punta a punta.
 - [ ] T17 — Registrar URLs y capturas reales en el informe — Agente: Revisor (persona) — RN: todas — HU: todas — Dep: T14–T16 — Terminado: enlaces y evidencia reales en README e informe.

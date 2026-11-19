@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS trips (
   stadium        VARCHAR(160) NOT NULL,
   departure_at   TIMESTAMPTZ NOT NULL,
   meeting_point  VARCHAR(160) NOT NULL DEFAULT '',
+  competition    VARCHAR(80) NOT NULL DEFAULT '',
+  match_at       TIMESTAMPTZ,
   ticket_price   NUMERIC(12,2) NOT NULL CHECK (ticket_price >= 0),
   capacity       INTEGER NOT NULL CHECK (capacity BETWEEN 1 AND 100),
   status         VARCHAR(20) NOT NULL DEFAULT 'Abierto'
@@ -24,6 +26,10 @@ CREATE TABLE IF NOT EXISTS trips (
   created_at     TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at     TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+-- Actualización para bases creadas con una versión anterior (no hace nada si las columnas ya existen).
+ALTER TABLE trips ADD COLUMN IF NOT EXISTS competition VARCHAR(80) NOT NULL DEFAULT '';
+ALTER TABLE trips ADD COLUMN IF NOT EXISTS match_at TIMESTAMPTZ;
 
 CREATE TABLE IF NOT EXISTS passengers (
   id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),

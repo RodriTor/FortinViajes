@@ -27,7 +27,7 @@ Catálogo de viajes, autenticación, inscripción, cancelación con reintegro, p
   - `Finalizado` y `Cancelado` son definitivos. No se puede fijar manualmente `Abierto` ni `Completo`.
   - Al cancelar un viaje, todos sus pasajeros activos pasan a CANCELADO con reintegro total de lo abonado.
   - No se pueden agregar ni cancelar pasajeros en viajes `En Viaje`, `Finalizado` o `Cancelado` (ni agregar en uno `Completo`).
-- **RN7 — Creación de viaje:** rival y estadio obligatorios; fecha y hora de salida válidas y futuras; capacidad entera entre 1 y 100; precio numérico mayor o igual a 0; punto de encuentro opcional. Solo el organizador crea viajes. El viaje nace `Abierto`.
+- **RN7 — Creación de viaje:** rival y estadio obligatorios; fecha y hora de salida válidas y futuras; capacidad entera entre 1 y 100; precio numérico mayor o igual a 0; punto de encuentro opcional; competición (hasta 80 caracteres) y horario del partido opcionales, y si se informa el horario del partido debe ser posterior a la salida del micro. Solo el organizador crea viajes. El viaje nace `Abierto`.
 
 ### Inscripción y cancelación
 - **RN8 — Cierre de inscripción:** un hincha puede anotarse hasta 3 horas antes de la salida (inclusive). El organizador puede anotar pasajeros hasta el momento de la salida.

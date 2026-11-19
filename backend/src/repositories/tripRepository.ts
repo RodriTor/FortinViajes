@@ -9,6 +9,8 @@ export interface TripRecord {
   stadium: string;
   departureAt: Date;
   meetingPoint: string;
+  competition: string;
+  matchAt: Date | null;
   ticketPrice: number;
   capacity: number;
   status: TripStatus;
@@ -16,7 +18,7 @@ export interface TripRecord {
 }
 
 const SELECT = `
-  SELECT t.id, t.rival, t.stadium, t.departure_at, t.meeting_point, t.ticket_price, t.capacity, t.status,
+  SELECT t.id, t.rival, t.stadium, t.departure_at, t.meeting_point, t.competition, t.match_at, t.ticket_price, t.capacity, t.status,
          (SELECT COUNT(*) FROM passengers p WHERE p.trip_id = t.id AND p.status = 'ACTIVO')::int AS seats_occupied
   FROM trips t`;
 
@@ -27,6 +29,8 @@ function map(row: any): TripRecord {
     stadium: row.stadium,
     departureAt: row.departure_at,
     meetingPoint: row.meeting_point,
+    competition: row.competition,
+    matchAt: row.match_at,
     ticketPrice: Number(row.ticket_price),
     capacity: row.capacity,
     status: row.status,
@@ -65,9 +69,9 @@ export class TripRepository {
 
   async create(db: Queryable, input: TripInput, createdBy: string): Promise<string> {
     const r = await db.query(
-      `INSERT INTO trips (rival, stadium, departure_at, meeting_point, ticket_price, capacity, created_by)
-       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`,
-      [input.rival, input.stadium, input.departureAt, input.meetingPoint, input.ticketPrice, input.capacity, createdBy]
+      `INSERT INTO trips (rival, stadium, departure_at, meeting_point, competition, match_at, ticket_price, capacity, created_by)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`,
+      [input.rival, input.stadium, input.departureAt, input.meetingPoint, input.competition, input.matchAt, input.ticketPrice, input.capacity, createdBy]
     );
     return r.rows[0].id;
   }

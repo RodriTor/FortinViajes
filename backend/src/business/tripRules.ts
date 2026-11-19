@@ -1,7 +1,7 @@
 // Reglas de viajes: RN6 (estados) y RN7 (creación).
 import { AppError } from "../errors.js";
 import { MAX_CAPACITY, MAX_PRICE, TripStatus } from "./constants.js";
-import { parseDepartureDateTime } from "./time.js";
+import { parseDateTime, parseDepartureDateTime } from "./time.js";
 import { requireObject, round2, trimmedString } from "./validation.js";
 
 export interface TripInput {
@@ -9,6 +9,8 @@ export interface TripInput {
   stadium: string;
   departureAt: Date;
   meetingPoint: string;
+  competition: string;
+  matchAt: Date | null;
   ticketPrice: number;
   capacity: number;
 }
@@ -20,7 +22,10 @@ export function parseTripInput(data: unknown, now: Date = new Date()): TripInput
   const stadium = trimmedString(body.stadium);
   const meetingPoint = body.meetingPoint === undefined || body.meetingPoint === null ? "" : trimmedString(body.meetingPoint);
 
+  const competition = body.competition === undefined || body.competition === null ? "" : trimmedString(body.competition);
+
   if (!rival) throw new AppError(400, "El rival es obligatorio");
+  if (competition.length > 80) throw new AppError(400, "La competición no puede superar los 80 caracteres");
   if (rival.length > 120) throw new AppError(400, "El rival no puede superar los 120 caracteres");
   if (!stadium) throw new AppError(400, "El estadio es obligatorio");
   if (stadium.length > 160) throw new AppError(400, "El estadio no puede superar los 160 caracteres");
@@ -31,6 +36,13 @@ export function parseTripInput(data: unknown, now: Date = new Date()): TripInput
     throw new AppError(400, "La fecha y hora de salida debe ser futura");
   }
 
+  // RN7: el horario del partido es opcional, pero si se informa debe ser posterior a la salida del micro.
+  const hasMatch = body.matchDateTime !== undefined && body.matchDateTime !== null && body.matchDateTime !== "";
+  const matchAt = hasMatch ? parseDateTime(body.matchDateTime, "La fecha y hora del partido no es válida") : null;
+  if (matchAt && matchAt.getTime() <= departureAt.getTime()) {
+    throw new AppError(400, "El partido debe empezar después de la salida del micro");
+  }
+
   const { capacity, ticketPrice } = body;
   if (typeof capacity !== "number" || !Number.isInteger(capacity) || capacity < 1 || capacity > MAX_CAPACITY) {
     throw new AppError(400, `La capacidad debe ser un número entero entre 1 y ${MAX_CAPACITY}`);
@@ -39,7 +51,7 @@ export function parseTripInput(data: unknown, now: Date = new Date()): TripInput
     throw new AppError(400, "El precio del pasaje debe ser un número mayor o igual a 0");
   }
 
-  return { rival, stadium, departureAt, meetingPoint, ticketPrice: round2(ticketPrice), capacity };
+  return { rival, stadium, departureAt, meetingPoint, competition, matchAt, ticketPrice: round2(ticketPrice), capacity };
 }
 
 /** Estados en los que se pueden agregar o cancelar pasajeros. */

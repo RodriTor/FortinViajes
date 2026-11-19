@@ -10,8 +10,8 @@
 | Verificación | Comando | Resultado |
 |---|---|---|
 | Tipos (backend y frontend) | `npm run typecheck` | Sin errores |
-| Tests unitarios (sin base de datos) | `npm run test:unit -w backend` | **50 de 50 pasan** |
-| Suite completa (unitarios + integración + concurrencia) | `npm test` | **104 de 104 pasan** (20 suites, 0 fallas, 0 omitidos) |
+| Tests unitarios (sin base de datos) | `npm run test:unit -w backend` | **53 de 53 pasan** |
+| Suite completa (unitarios + integración + concurrencia) | `npm test` | **107 de 107 pasan** (20 suites, 0 fallas, 0 omitidos) |
 | Build de producción | `npm run build` | Backend (tsc) y frontend (vite) compilan |
 | Arranque de producción | `NODE_ENV=production node backend/dist/server.js` | `/api/health` → `ok`; sin `JWT_SECRET` se niega a arrancar |
 | Secretos en el repo | `git ls-files` + búsqueda de cadenas de conexión | Sin `.env` ni credenciales versionadas |
@@ -39,7 +39,7 @@ Sin `TEST_DATABASE_URL`, los 54 tests de integración se omiten con un aviso (no
 | RN16 Integridad | `validation.test`; `trips.test` y `passengers.test` (ids mal formados → 404); `concurrency.test` (CHECK de la base) |
 
 ## 4. Prueba de punta a punta en navegador (frontend + API + PostgreSQL)
-Ejecutada con Playwright (Chromium) contra la app compilada y la API real, con datos de `seed.example.sql`:
+Ejecutada con Playwright (Chromium) contra la app compilada y la API real, con datos de ejemplo:
 
 | Paso | Resultado |
 |---|---|

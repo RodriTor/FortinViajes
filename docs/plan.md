@@ -15,7 +15,7 @@ Navegador (Netlify) ──HTTPS/JSON──► API Express (Render) ──SQL/SSL
 
 ## Modelo de datos
 - `users(id uuid, name, email unique, password_hash, role, created_at)`
-- `trips(id uuid, rival, stadium, departure_at, meeting_point, ticket_price, capacity, status, created_by, created_at, updated_at)`
+- `trips(id uuid, rival, stadium, departure_at, meeting_point, competition, match_at, ticket_price, capacity, status, created_by, created_at, updated_at)`
 - `passengers(id uuid, trip_id, user_id null, name, dni, phone, member_number, payment_status, deposit_amount null, status, refund_amount, retained_amount, cancelled_at, created_at)`
 
 Restricciones clave en `backend/sql/schema.sql`: `CHECK` de estados y DNI, índice único parcial `(trip_id, dni) WHERE status='ACTIVO'`, trigger `enforce_trip_capacity` y `CHECK` de coherencia de seña.

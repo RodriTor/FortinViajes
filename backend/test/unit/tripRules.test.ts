@@ -38,6 +38,20 @@ describe("RN7 — creación de viaje", () => {
       assert.throws(() => parseTripInput({ ...valid, ticketPrice }, now), status, String(ticketPrice));
     }
   });
+  test("competición y horario del partido son opcionales", () => {
+    const t = parseTripInput(valid, now);
+    assert.equal(t.competition, "");
+    assert.equal(t.matchAt, null);
+    const full = parseTripInput({ ...valid, competition: " Octavos de final ", matchDateTime: "2026-12-01T20:00" }, now);
+    assert.equal(full.competition, "Octavos de final");
+    assert.equal(full.matchAt?.toISOString(), "2026-12-01T23:00:00.000Z");
+  });
+  test("el partido debe empezar después de la salida del micro y tener fecha válida (400)", () => {
+    assert.throws(() => parseTripInput({ ...valid, matchDateTime: "2026-12-01T18:00" }, now), status);
+    assert.throws(() => parseTripInput({ ...valid, matchDateTime: "2026-12-01T17:00" }, now), status);
+    assert.throws(() => parseTripInput({ ...valid, matchDateTime: "pronto" }, now), status);
+    assert.throws(() => parseTripInput({ ...valid, competition: "x".repeat(81) }, now), status);
+  });
   test("el cuerpo debe ser un objeto (400)", () => {
     assert.throws(() => parseTripInput(null, now), status);
     assert.throws(() => parseTripInput([], now), status);

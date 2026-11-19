@@ -17,6 +17,8 @@ export function toTripDto(t: TripRecord) {
     stadium: t.stadium,
     departureDateTime: t.departureAt.toISOString(),
     meetingPoint: t.meetingPoint,
+    competition: t.competition,
+    matchDateTime: t.matchAt ? t.matchAt.toISOString() : null,
     ticketPrice: t.ticketPrice,
     capacity: t.capacity,
     status: t.status,

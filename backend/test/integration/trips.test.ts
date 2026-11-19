@@ -19,6 +19,18 @@ describe("HU1 / HU5 — viajes", { skip: TEST_DATABASE_URL ? false : SKIP_REASON
     assert.equal(r.body.trip.departureDateTime, "2026-12-01T21:00:00.000Z");
   });
 
+  test("RN7: se guardan la competición y el horario del partido, y se devuelven en el listado público", async () => {
+    const r = await ctx.call("POST", "/trips", { token: adminToken, body: { ...body, competition: "Octavos de final", matchDateTime: "2026-12-01T20:00" } });
+    assert.equal(r.status, 201);
+    assert.equal(r.body.trip.competition, "Octavos de final");
+    assert.equal(r.body.trip.matchDateTime, "2026-12-01T23:00:00.000Z");
+    const list = (await ctx.call("GET", "/trips")).body.trips[0];
+    assert.equal(list.competition, "Octavos de final");
+    assert.equal((await ctx.call("POST", "/trips", { token: adminToken, body: { ...body, matchDateTime: "2026-12-01T17:00" } })).status, 400);
+    const plain = await ctx.call("POST", "/trips", { token: adminToken, body });
+    assert.equal(plain.body.trip.matchDateTime, null);
+  });
+
   test("RN12: un hincha no crea viajes (403) y sin sesión es 401", async () => {
     const u = await ctx.register("Hincha", "h@test.com");
     assert.equal((await ctx.call("POST", "/trips", { token: u.token, body })).status, 403);
