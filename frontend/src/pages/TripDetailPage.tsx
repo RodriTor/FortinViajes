@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { api } from "../api";
 import { useAuth } from "../auth";
 import { ErrorAlert, Loading, SeatMeter, StatusBadge } from "../components/ui";
-import { dateTime, money } from "../format";
+import { dateTime, money, timeOnly } from "../format";
 import { Link } from "../router";
 import { useToast } from "../toast";
 import type { Passenger, Trip } from "../types";
@@ -47,7 +47,9 @@ export function TripDetailPage({ id }: { id: string }) {
           <StatusBadge value={trip.status} />
           <h1 id="t" style={{ marginTop: 8 }}>vs {trip.rival}</h1>
           <dl className="facts">
-            <dt>Salida</dt><dd>{dateTime(trip.departureDateTime)}</dd>
+            {trip.competition && <><dt>Competición</dt><dd>{trip.competition}</dd></>}
+            <dt>Salida del micro</dt><dd>{dateTime(trip.departureDateTime)}</dd>
+            {trip.matchDateTime && <><dt>Parte del partido</dt><dd>{timeOnly(trip.matchDateTime)} h</dd></>}
             <dt>Punto de encuentro</dt><dd>{trip.meetingPoint || "A confirmar"}</dd>
             <dt>Estadio</dt><dd>{trip.stadium}</dd>
             <dt>Pasaje</dt><dd><strong>{money(trip.ticketPrice)}</strong></dd>

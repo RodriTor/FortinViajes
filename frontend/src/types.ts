@@ -6,7 +6,7 @@ export interface User { id: string; name: string; email: string; role: Role }
 
 export interface Trip {
   id: string; rival: string; stadium: string; departureDateTime: string; meetingPoint: string;
-  ticketPrice: number; capacity: number; status: TripStatus; seatsOccupied: number; seatsAvailable: number;
+  competition: string; matchDateTime: string | null; ticketPrice: number; capacity: number; status: TripStatus; seatsOccupied: number; seatsAvailable: number;
 }
 
 export interface Passenger {

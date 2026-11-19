@@ -10,7 +10,7 @@
 | Verificación | Comando | Resultado |
 |---|---|---|
 | Tipos (backend y frontend) | `npm run typecheck` | Sin errores |
-| Tests unitarios (sin base de datos) | `npm run test:unit -w backend` | **53 de 53 pasan** |
+| Tests unitarios (sin base de datos) | `npm run test:unit -w backend` | **52 de 52 pasan** |
 | Suite completa (unitarios + integración + concurrencia) | `npm test` | **107 de 107 pasan** (20 suites, 0 fallas, 0 omitidos) |
 | Build de producción | `npm run build` | Backend (tsc) y frontend (vite) compilan |
 | Arranque de producción | `NODE_ENV=production node backend/dist/server.js` | `/api/health` → `ok`; sin `JWT_SECRET` se niega a arrancar |

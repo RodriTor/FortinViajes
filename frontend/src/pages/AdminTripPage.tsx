@@ -96,7 +96,7 @@ export function AdminTripPage({ id }: { id: string }) {
           <div className="row row-between">
             <div>
               <h1>vs {trip.rival}</h1>
-              <p className="muted">{dateTime(trip.departureDateTime)} · {trip.stadium} · sale de {trip.meetingPoint || "punto a confirmar"} · pasaje {money(trip.ticketPrice)}</p>
+              <p className="muted">{trip.competition ? `${trip.competition} · ` : ""}{dateTime(trip.departureDateTime)} · {trip.stadium} · sale de {trip.meetingPoint || "punto a confirmar"} · pasaje {money(trip.ticketPrice)}</p>
             </div>
             <StatusBadge value={trip.status} />
           </div>

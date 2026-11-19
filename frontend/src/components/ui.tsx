@@ -25,7 +25,8 @@ export function TripTicket({ trip, to }: { trip: Trip; to: string }) {
       <div className="ticket-main">
         <StatusBadge value={trip.status} />
         <h2>vs {trip.rival}</h2>
-        <p className="where">{trip.stadium}</p>
+        {trip.competition && <p className="where"><strong>{trip.competition}</strong></p>}
+        <p className="where">{trip.stadium}{trip.matchDateTime ? ` · juegan ${timeOnly(trip.matchDateTime)} h` : ""}</p>
         <p className="where">Sale de {trip.meetingPoint || "punto a confirmar"}</p>
         <SeatMeter capacity={trip.capacity} occupied={trip.seatsOccupied} />
       </div>

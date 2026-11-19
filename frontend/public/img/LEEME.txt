@@ -1,0 +1,11 @@
+FOTOS DEL CLUB (opcional)
+
+La portada usa estas imágenes si existen. Si no están, se ve igual con el diseño de respaldo.
+Copiá acá tus propias fotos (o fotos con permiso de uso) con estos nombres exactos:
+
+  hero.jpg         Fondo de la portada (ideal: foto horizontal del Amalfitani, mínimo 1600 px de ancho)
+  historia-1.jpg   Tarjeta "1910"  (fundación)
+  historia-2.jpg   Tarjeta "1951"  (el estadio)
+  historia-3.jpg   Tarjeta "1994"  (Libertadores e Intercontinental)
+
+Después reiniciá `npm run dev` (o volvé a hacer el build). No subas fotos que no tengas derecho a usar si publicás el repositorio.

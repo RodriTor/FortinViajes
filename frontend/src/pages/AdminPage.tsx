@@ -7,7 +7,7 @@ import { Link } from "../router";
 import { useToast } from "../toast";
 import type { Trip } from "../types";
 
-const EMPTY = { rival: "", stadium: "Estadio José Amalfitani", departureDateTime: "", meetingPoint: "", ticketPrice: "", capacity: "" };
+const EMPTY = { rival: "", stadium: "Estadio José Amalfitani", departureDateTime: "", meetingPoint: "", competition: "", matchDateTime: "", ticketPrice: "", capacity: "" };
 
 export function AdminGuard({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -37,7 +37,7 @@ export function AdminPage() {
     setFormError(""); setBusy(true);
     try {
       await api("POST", "/trips", {
-        rival: form.rival, stadium: form.stadium, departureDateTime: form.departureDateTime, meetingPoint: form.meetingPoint,
+        rival: form.rival, stadium: form.stadium, departureDateTime: form.departureDateTime, meetingPoint: form.meetingPoint, competition: form.competition, matchDateTime: form.matchDateTime || undefined,
         ticketPrice: form.ticketPrice === "" ? undefined : Number(form.ticketPrice),
         capacity: form.capacity === "" ? undefined : Number(form.capacity)
       });
@@ -56,6 +56,8 @@ export function AdminPage() {
             <div className="field"><label htmlFor="r">Rival</label><input id="r" value={form.rival} onChange={set("rival")} required /></div>
             <div className="field"><label htmlFor="e">Estadio</label><input id="e" value={form.stadium} onChange={set("stadium")} required /></div>
             <div className="field"><label htmlFor="f">Fecha y hora de salida <span className="hint">(horario argentino)</span></label><input id="f" type="datetime-local" value={form.departureDateTime} onChange={set("departureDateTime")} required /></div>
+            <div className="field"><label htmlFor="co">Competición <span className="hint">(opcional)</span></label><input id="co" value={form.competition} onChange={set("competition")} placeholder="Ej. Octavos de final · Clausura 2026" /></div>
+            <div className="field"><label htmlFor="ma">Hora del partido <span className="hint">(opcional, horario argentino)</span></label><input id="ma" type="datetime-local" value={form.matchDateTime} onChange={set("matchDateTime")} /></div>
             <div className="field"><label htmlFor="pe">Punto de encuentro <span className="hint">(opcional)</span></label><input id="pe" value={form.meetingPoint} onChange={set("meetingPoint")} /></div>
             <div className="field"><label htmlFor="pr">Precio del pasaje (ARS)</label><input id="pr" type="number" min="0" inputMode="numeric" value={form.ticketPrice} onChange={set("ticketPrice")} required /></div>
             <div className="field"><label htmlFor="c">Capacidad del micro <span className="hint">(1 a 100)</span></label><input id="c" type="number" min="1" max="100" inputMode="numeric" value={form.capacity} onChange={set("capacity")} required /></div>
