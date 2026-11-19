@@ -7,7 +7,7 @@ Formato: `ID — Descripción — Agente — RN — HU — Dependencias — Crit
 - [x] T03 — Esquema PostgreSQL — Agente: Backend — RN: 1, 3, 4, 6, 16 — HU: 3, 4, 5, 6 — Dep: T02 — Terminado: tablas, índice único parcial y trigger de capacidad aplican sobre una base real.
 - [x] T04 — Reglas de negocio puras con tests unitarios — Agente: Backend/Tester — RN: 2, 4, 6, 7, 8, 9, 11, 14, 15 — HU: 3, 4, 5, 6 — Dep: T02 — Terminado: funciones puras y tests unitarios en verde.
 - [x] T05 — Infraestructura del backend y autenticación — Agente: Backend — RN: 12, 16 — HU: 2 — Dep: T03 — Terminado: config, pool, errores, app Express, registro, login, JWT, roles.
-- [ ] T06 — API de viajes — Agente: Backend — RN: 6, 7, 12 — HU: 1, 5 — Dep: T04, T05 — Terminado: listar, detalle, crear, cambiar estado (con cascada de cancelación).
+- [x] T06 — API de viajes — Agente: Backend — RN: 6, 7, 12 — HU: 1, 5 — Dep: T04, T05 — Terminado: listar, detalle, crear, cambiar estado (con cascada de cancelación).
 - [ ] T07 — API de pasajeros: anotar, cancelar y registrar pago — Agente: Backend — RN: 1–5, 8–12, 16 — HU: 3, 4, 6 — Dep: T04, T06 — Terminado: reglas de cupo, DNI, límites, cierre, reintegro y pagos operando en transacción.
 - [ ] T08 — Resumen, búsqueda y "Mis lugares" — Agente: Backend — RN: 12, 13, 15 — HU: 4, 6 — Dep: T07 — Terminado: endpoints de resumen, lista con búsqueda y mis lugares.
 - [ ] T09 — Tests de integración y concurrencia contra PostgreSQL — Agente: Tester — RN: todas — HU: todas — Dep: T05–T08 — Terminado: suite de API y prueba de carrera de cupo en verde.

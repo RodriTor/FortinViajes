@@ -10,9 +10,14 @@ import { createAuthMiddleware } from "./middleware/auth.js";
 import { UserRepository } from "./repositories/userRepository.js";
 import { AuthService } from "./services/authService.js";
 import { AuthController } from "./controllers/authController.js";
+import { PassengerRepository } from "./repositories/passengerRepository.js";
+import { TripRepository } from "./repositories/tripRepository.js";
+import { TripService } from "./services/tripService.js";
+import { TripController } from "./controllers/tripController.js";
+import { createTripRoutes } from "./routes/tripRoutes.js";
 import { createAuthRoutes } from "./routes/authRoutes.js";
 
-export function createApp(db: Database, config: Config) {
+export function createApp(db: Database, config: Config, clock: () => Date = () => new Date()) {
   const app = express();
   app.set("trust proxy", 1); // Render/Netlify están detrás de un proxy
   app.use(helmet());
@@ -26,7 +31,10 @@ export function createApp(db: Database, config: Config) {
 
   const userRepo = new UserRepository();
   const authService = new AuthService(db, userRepo, config.jwtSecret);
-  const { requireAuth } = createAuthMiddleware(authService);
+  const { requireAuth, requireAdmin } = createAuthMiddleware(authService);
+  const tripRepo = new TripRepository();
+  const passengerRepo = new PassengerRepository();
+  const tripService = new TripService(db, tripRepo, passengerRepo, clock);
 
   const api = express.Router();
   api.get("/health", async (_req, res) => {
@@ -39,6 +47,7 @@ export function createApp(db: Database, config: Config) {
   });
   api.use("/auth", rateLimit({ windowMs: 15 * 60 * 1000, limit: config.authRateLimit, standardHeaders: true, legacyHeaders: false, message: { error: "Demasiados intentos. Probá de nuevo en unos minutos." } }));
   api.use("/auth", createAuthRoutes(new AuthController(authService), requireAuth));
+  api.use("/trips", createTripRoutes(new TripController(tripService), requireAuth, requireAdmin));
   app.use("/api", api);
 
   app.use("/api", (_req, _res, next) => next(new AppError(404, "Ruta no encontrada")));
