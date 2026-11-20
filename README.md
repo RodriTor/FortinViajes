@@ -7,8 +7,8 @@ Trabajo práctico final — Generación T. Evolución del backend de los TP ante
 ## Enlaces públicos
 | Qué | URL |
 |---|---|
-| Aplicación (frontend, Netlify) | _pendiente: completar al publicar (ver `docs/despliegue.md`)_ |
-| API (Render) | _pendiente_ `/api/health` |
+| Aplicación (frontend, Netlify) | https://fortinviajes-fortinviajes-frontend.netlify.app/ |
+| API (Render) | https://fortinviajes.onrender.com |
 | Base de datos | Neon (PostgreSQL) |
 
 ## Qué hace
