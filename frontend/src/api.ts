@@ -1,3 +1,4 @@
+// Rebuild forzado para tomar el nuevo VITE_API_URL (termina en /api).
 const BASE = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/+$/, "") ?? "http://localhost:3000/api";
 const TOKEN_KEY = "fortinviajes.token";
 
